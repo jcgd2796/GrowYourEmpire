@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Entrenamiento - Grow Your Empire</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        {% include "GrowYourEmpire/navbar.html" %}
+        <div class="container">
+            <div class="row col s12 card blue lighten-4">
+                <div class="card-content">
+                    <h4>
+                        <i class="material-icons left">military_tech</i>
+                        Entrenar soldados
+                    </h4>
+                    Actualmente tienes {{village.storedFood}} unidades de alimento.
+                    <form id="trainForm" name="trainForm" action="./saveTraining" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="input-field">
+                                    <p class="grey-text">Soldados a entrenar</p>
+                                    <input type="number" name="amount" id="amount" value="1" min="1" max="{{maxSoldiers}}" class="validate col s12" required>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <p class="black-text"><b>Coste</b></p>
+                                <p class="cost-display" id="cost"></p>
+                            </div>
+                        </div>
+                        <div class="card-action center-align">
+                            <button class="btn waves-effect waves-light blue darken-2" type="submit" name="submit">
+                                <i class="material-icons left">add</i>Entrenar
+                            </button>
+                            <a class="btn waves-effect waves-light red darken-5" href='/GrowYourEmpire/manager'>
+                                <i class="material-icons left">cancel</i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/init-materialize.js' %}"></script>
+        <script src="{% static 'js/units_update.js' %}"></script>
+    </body>
+</html>
+
+

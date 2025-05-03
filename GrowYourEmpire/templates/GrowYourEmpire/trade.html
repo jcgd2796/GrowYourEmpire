@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comercio - Grow Your Empire</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}   
+    <div class="container">
+        <div class="col s12 card blue lighten-4">
+            <div class="card-content">
+                <h4>
+                    <i class="material-icons left">swap_horiz</i>
+                    Comerciar
+                </h4>
+                <h6>Actualmente tienes {{village.storedFood}} unidades de alimento, {{village.storedWood}} de madera, y {{village.storedStone}} de piedra.</h6>
+                  
+                <form name="tradeForm" id="tradeForm" action="./saveTrade" method="POST">
+                {% csrf_token %}
+                    <div class="row col s12">
+                        <h4>Aldea objetivo</h4>
+                        <select name="target">
+                            {% for village in villages %}
+                            <option>{{ village.villageName }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <h5>Recursos a ofrecer</h5>
+                    <div class="row col s12">
+                        <div class="col s4">
+                            <i class="material-icons preview">restaurant</i><p class="grey-text">Alimento (max {{village.storedFood}})</p>
+                            <input type="number" name="offeredFood" id="offeredFood" value="0" min="0" max="{{village.storedFood}}" required>
+                        </div>
+                        <div class="col s4">
+                            <i class="material-icons preview">park</i><p class="grey-text">Madera (max {{village.storedWood}})</p>
+                            <input type="number" name="offeredWood" id="offeredWood" value="0" min="0" max="{{village.storedWood}}" required>
+                        </div>
+                        <div class="col s4">
+                            <i class="material-icons preview">landscape</i><p class="grey-text">Piedra (max {{village.storedStone}})</p>
+                            <input type="number" name="offeredStone" id="offeredStone" value="0" min="0" max="{{village.storedStone}}" required>
+                        </div>
+                    </div>
+                    <h5>Recursos solicitados</h5>
+                    <div class="row col s12">
+                        <div class="col s4">
+                            <i class="material-icons preview">restaurant</i><p class="grey-text">Alimento</p>
+                            <input type="number" name="wantedFood" id="wantedFood" value="0" min="0" required>
+                        </div>
+                        <div class="col s4">
+                            <i class="material-icons preview">park</i><p class="grey-text">Madera</p>
+                            <input type="number" name="wantedWood" id="wantedWood" value="0" min="0" required>
+                        </div>
+                        <div class="col s4">
+                            <i class="material-icons preview">landscape</i><p class="grey-text">Piedra</p>
+                            <input type="number" name="wantedStone" id="wantedStone" value="0" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="card-action center-align">
+                        <button class="btn waves-effect waves-light blue darken-2" type="submit" name="submit">
+                            <i class="material-icons left">send</i>Enviar oferta
+                        </button>
+                        <a class="btn waves-effect waves-light red darken-5" href='/GrowYourEmpire/manager'>
+                            <i class="material-icons left">cancel</i>Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dioses - Grow Your Empire</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'js/god_check.js' %}"></script>
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}
+    
+    <div class="container col s12">
+        <div class="card row blue lighten-4">
+            <div class="card-content">
+                <h4>Dioses Mayores</h4>
+                <p>A continuación se muestran los dioses disponibles para elegir. Cada dios tiene un bonus que se aplicará a tu aldea una vez elegido.</p>
+                <p>Para elegir un dios, deberás construir un templo. Este templo cuesta:</p>
+                <div class="row center-align">
+                    <div class="col s4">
+                        <p><i class="material-icons">restaurant</i></p>
+                        <p>1000 alimento</p>
+                    </div>
+                    <div class="col s4">
+                        <p><i class="material-icons">park</i></p>
+                        <p>1000 madera</p>
+                    </div>
+                    <div class="col s4">
+                        <p><i class="material-icons">landscape</i></p>
+                        <p>1000 piedra</p>
+                    </div>
+                </div>
+                <p>Solo se puede construir un templo por aldea. Si deseas cambiar de dios, deberás destruir el templo actual y construir uno nuevo.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for god in gods %}
+            <div class="card col s12 m6 l6 blue lighten-4">
+                <div class="card-content">
+                    <span class="card-title black-text">{{god.name}}</span>
+                    <p class="black-text">{{god.desc}}</p>
+                </div>
+                <div class="card-action">
+                    <p class="black-text">{{god.bonus}}</p>
+                </div>
+                <div class="card-action center-align">
+                    <a class="waves-effect waves-light btn blue darken-2" 
+                    id="villageData" 
+                    data-stored-food="{{ village.storedFood }}"
+                    data-stored-wood="{{ village.storedWood }}"
+                    data-stored-stone="{{ village.storedStone }}"
+                    href="/GrowYourEmpire/manager/saveGod{{god.name}}" 
+                    onclick="return checkGodBounds()">
+                    <i class="material-icons left">bolt</i>
+                    Elegir a {{god.name}}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+<script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>

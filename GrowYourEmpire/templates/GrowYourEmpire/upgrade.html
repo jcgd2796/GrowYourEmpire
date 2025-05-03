@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mejoras - Grow Your Empire</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="{% static 'js/upgrade_check.js' %}"></script>
+    </head>
+    <body">
+        {% include "GrowYourEmpire/navbar.html" %}
+        <div id="villageData" data-levels='{
+        "food": {{ village.foodLevel }},
+        "wood": {{ village.woodLevel }},
+        "stone": {{ village.stoneLevel }},
+        "wall": {{ village.wallLevel }},
+        "storage": {{ village.storageLevel }}
+            }'
+        data-resources='{
+            "wood": {{ village.storedWood }},
+            "stone": {{ village.storedStone }}
+        }'
+        </div>
+        <div class="container">
+            <div class="row col s12 card blue lighten-4">
+                <div class="card-content ">
+                    <h5>
+                        Mejorar edificio
+                    </h5>
+                    <span class="card-text">
+                        <i class="material-icons"></i>Actualmente tienes {{village.storedWood}} unidades de madera, y {{village.storedStone}} de piedra.
+                    </span>
+                    <form id="upgradeForm" name="upgradeForm" action="./saveUpgrade" onsubmit="return checkBounds()" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="input-field building-select">
+                                    <select id="building" name="building" class="browser-default">
+                                        <option value="" disabled selected>Selecciona un edificio</option>
+                                        {% if 1 in upgrades %}
+                                            <option>Granja (nivel {{ village.foodLevel }})</option>
+                                        {% endif %}
+                                        {% if 2 in upgrades %}
+                                            <option>Aserradero (nivel {{ village.woodLevel }})</option>
+                                        {% endif %}
+                                        {% if 3 in upgrades %}
+                                            <option>Cantera (nivel {{ village.stoneLevel }})</option>
+                                        {% endif %}
+                                        {% if 4 in upgrades %}
+                                            <option>Murallas (nivel {{ village.wallLevel }})</option>
+                                        {% endif %}
+                                        {% if 5 in upgrades %}
+                                            <option>Almacenamiento (nivel {{ village.storageLevel }})</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <h5>Coste de la mejora</h5>
+                                <div class="cost-display" id="cost">-</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selectedIndex" name="selectedIndex" value="">
+                        <div class="card-action center-align">
+                            <button class="btn waves-effect waves-light blue darken-2" type="submit" name="submit">
+                                <i class="material-icons left">arrow_upward</i>Mejorar
+                            </button>
+                            <a class="btn waves-effect waves-light red darken-5" href='/GrowYourEmpire/manager'>
+                                <i class="material-icons left">cancel</i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/init-materialize.js' %}"></script>
+        <script src="{% static 'js/upgrade_check.js' %}"></script>
+    </body>
+</html>
+
+

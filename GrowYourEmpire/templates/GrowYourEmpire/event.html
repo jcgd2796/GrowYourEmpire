@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evento - {{event.title}}</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'js/event_check.js' %}"></script>
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}
+    
+    <div class="container">
+        <div class="row col s12 card blue lighten-4">
+            <div class="card-content">
+                <h4>{{event.title}}</h4>
+                <p>{{event.desc|linebreaks}}</p>
+                <div>
+                    <p><i class="material-icons">event</i>Fecha de inicio: {{event.startDate|date:"d/m/Y H:m"}}</p>
+                    <p><i class="material-icons">event</i>Fecha de fin: {{event.endDate|date:"d/m/Y H:m"}}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row col s12 card blue lighten-4">
+            <div class="card-content">
+                <span class="card-title">
+                    <i class="material-icons left">redeem</i>Realizar aportación a evento
+                </span>
+                <span class="card-text">
+                    <i class="material-icons"></i>Actualmente tienes {{village.storedFood}} unidades de alimento, {{village.storedWood}} de madera, {{village.storedStone}} de piedra y {{village.soldiers}} soldados.
+                </span>
+                <form action="./donate" name="eventForm" id="eventForm"
+                data-food-required="{{ event.foodRequired }}"
+                data-wood-required="{{ event.woodRequired }}"
+                data-stone-required="{{ event.stoneRequired }}"
+                data-soldiers-required="{{ event.soldiersRequired }}"
+                data-stored-food="{{ village.storedFood }}"
+                data-stored-wood="{{ village.storedWood }}"
+                data-stored-stone="{{ village.storedStone }}"
+                data-stored-soldiers="{{ village.storedSoldiers }}"
+                onsubmit="return checkEventBounds()" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    {% if event.foodRequired > 0 %}
+                    <div class="input-field col s12 m6 l6">
+                        <p><i class="material-icons tiny">restaurant</i>Comida (Restante: {{event.foodRequired}})</p>
+                        <input type="number" min="0" max="{{village.storedFood}}" name="foodDonated" id="foodDonated" value="0" class="validate" required>  
+                    </div>
+                    {% endif %}
+                    {% if event.woodRequired > 0 %}
+                    <div class="input-field col s12 m6 l6">
+                        <p><i class="material-icons tiny">park</i>Madera (Restante: {{event.woodRequired}})</p>
+                        <input type="number" min="0" max="{{village.storedWood}}" name="woodDonated" id="woodDonated" value="0" class="validate" required>
+                    </div>
+                    {% endif %}
+                    {% if event.stoneRequired > 0 %}
+                    <div class="input-field col s12 m6 l6">
+                        <p><i class="material-icons tiny">landscape</i>Piedra (Restante: {{event.stoneRequired}})</p>
+                        <input type="number" min="0" max="{{village.storedStone}}" name="stoneDonated" id="stoneDonated" value="0" class="validate" required>
+                    </div>
+                    {% endif %}
+                    {% if event.soldiersRequired > 0 %}
+                    <div class="input-field col s12 m6 l6">
+                        <p><i class="material-icons tiny">military_tech</i>Soldados (Restante: {{event.soldiersRequired}})</p>
+                        <input type="number" min="0" max="{{village.soldiers}}" name="soldiersDonated" id="soldiersDonated" value="0" class="validate" required>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if event.foodRequired > 0 or event.woodRequired > 0 or event.stoneRequired > 0 or event.soldiersRequired > 0 %}
+                <div class="card-action center-align">
+                    <button class="btn waves-effect waves-light blue darken-2" type="submit">
+                        <i class="material-icons left">send</i>Donar
+                    </button>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    
+    <div class="row col s12 card blue lighten-4">
+        <div class="card-content">
+            <span class="card-title">
+                <i class="material-icons left">history</i>Donaciones Recientes
+            </span>
+            {% for donation in donations %}
+            <div>
+                <span class="title"><b>{{donation.owner.villageName}}</b></span>
+                <p>
+                    {% if donation.donatedFood > 0 %}
+                    <i class="material-icons tiny">restaurant</i>{{donation.donatedFood}} comida
+                    {% endif %}
+                    {% if donation.donatedWood > 0 %}
+                    <i class="material-icons tiny">park</i>{{donation.donatedWood}} madera
+                    {% endif %}
+                    {% if donation.donatedStone > 0 %}
+                    <i class="material-icons tiny">landscape</i>{{donation.donatedStone}} piedra
+                    {% endif %}
+                    {% if donation.donatedSoldiers > 0 %}
+                    <i class="material-icons tiny">military_tech</i>{{donation.donatedSoldiers}} soldados
+                    {% endif %}
+                </p>
+            </div>
+            <div class="divider"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+<script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>

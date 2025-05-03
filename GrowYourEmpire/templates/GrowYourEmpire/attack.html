@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atacar Aldea</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}
+    
+    <div class="container">
+        <div class="card col s12">
+            <div class="card-content blue lighten-4">
+                <span class="card-title">
+                    <i class="material-icons left">flag</i>Preparar Ataque
+                </span>
+                <form id="attackForm" name="attackForm" action="./saveAttack" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12 m6 l6">
+                            <p>Aldea objetivo</p>
+                            <select name="objective">
+                                {% for village in villages %}
+                                <option value="{{ village.villageName }}">{{ village.villageName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-field col s12 m6 l6">  
+                            <p>Soldados (máx: {{village.soldiers}})</p>
+                            <input type="number" name="units" id="units" value="1" min="1" max="{{village.soldiers}}" class="validate" required>
+                            
+                        </div>
+                        <div class="input-field col s12 m6 l6">  
+                            <p>Recurso a priorizar en el saqueo</p>
+                            <select name="wantedResource">
+                                <option value=0>Comida</option>
+                                <option value=1>Madera</option>
+                                <option value=2>Piedra</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row col s12 center-align">
+                        <div class="col s12 m6 l6">
+                            <button class="btn waves-effect waves-light blue darken-2" type="submit">
+                                <i class="material-icons left">send</i>Atacar
+                            </button>
+                        </div>
+                        <div class="col s12 m6 l6">
+                            <a class="btn waves-effect waves-light red darken-4" href="/GrowYourEmpire/manager">
+                                <i class="material-icons left">cancel</i>Cancelar
+                            </a>
+                        </div>
+                    </div>                            
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>Reglas - Grow Your Empire</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+        {% include "GrowYourEmpire/navbar.html" %}   
+        <div class="container">
+                <div class="row card col s12 blue lighten-4">
+                        <div class="card-content">
+                                <span class="card-title">
+                                        <h4>
+                                                <i class="material-icons left">book</i>
+                                                Reglas del juego
+                                        </h4>
+                                </span>
+                                <div>
+                                        <span><h5>Tests</h5></span>
+                                        <p>Tras cada clase de teoría, estará disponible un test con preguntas relativas al contenido visto durante la sesión. Cada pregunta correctamente respondida dará un 10% más de recursos generados durante los próximos 7 días.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Aldea</h5></span>
+                                        <p>Cada alumno es dueño de una aldea que genera una serie de recursos (madera, piedra y alimento) de forma automática cada día. El número de cada recurso generados varía en función de la aldea, pero todas generan la misma cantidad.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Comercio</h5></span>
+                                        <p>Se pueden realizar peticiones de comercio con cualquier otro jugador, ofreciendo una cantidad de recursos a cambio de otros recursos. Al realizar una solicitud, los recursos ofrecidos no estarán disponibles para ser utilizados hasta que la solicitud de negocio se acepte, rechace o cancele. Una petición solo se puede aceptar si tienes los recursos suficientes para realizar el intercambio, y se realizan de forma instantánea.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Mejoras</h5></span>
+                                        <div>
+                                                <p>
+                                                Se pueden mejorar todos los edificios hasta el nivel 100 (salvo el almacenamiento, que solo se puede mejorar hasta el nivel 19, y las murallas, que solo se pueden mejorar hasta el nivel 20). Cada mejora cuesta más recursos, pero dan las siguientes ventajas:
+                                                </p>
+                                                <ul>
+                                                        <li>Edificios de recursos: una unidad más de ese recurso generado diariamente.</li>
+                                                        <li>Murallas: un 5% más de efectividad de tus soldados al defenderte de un ataque por nivel.</li>
+                                                        <li>Almacenamiento: proteges un 5% de tus recursos actuales por nivel, haciendo que no puedan ser saqueados en un ataque.</li>
+                                                </ul>
+                                                <p>Solo se puede mejorar un nivel de un edificio al día.
+                                                </p>
+                                        </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Eventos</h5></span>
+                                        <p>Durante el transcurso del juego, surgirán eventos que necesitarán de la colaboración de todos los jugadores. El éxito en estos eventos podrá otorgar ventajas a todos los jugadores, mientras que el fracaso podría suponer una penalización. Para que un evento tenga éxito, se deben cumplir sus requisitos, que se especificarán en cada evento.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Dioses</h5></span>
+                                        <p>Cada jugador puede elegir un dios mayor al que adorar. Cada dios otorga una bonificación concreta, detallada en la sección de "Dioses". Un templo cuesta 1000 de piedra, 1000 de madera y 1000 de alimento, y solo se puede construir uno por aldea. En caso de que un jugador desee adorar a un dios distinto, deberá construir un nuevo templo, lo que supone la destrucción del anterior.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Ataque</h5></span>
+                                        <p>Puedes atacar a cualquier otro jugador con el número de soldados que desees. Para ganar un ataque, tu número de unidades empleadas en el mismo debe ser superior al número de defensores del enemigo (incluyendo su bonus por nivel de muralla). En caso de que ganes la batalla, podrás saquear todos los recursos que no estén protegidos en el almacén del jugador, y los soldados que hayan sobrevivido volverán a unirse al resto de soldados en la aldea. Por defecto, cada unidad puede cargar un máximo de 5 recursos.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Entrenamiento</h5></span>
+                                        <p>Puedes entrenar unidades a un coste de 2 de alimento por unidad.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Ejecución de órdenes</h5></span>
+                                        <p>Todas las órdenes permanecerán en cola hasta su ejecución diaria a las 10:00 y 22:00 CEST. A la hora de ejecutarse, se ejecutarán en el siguiente orden: 1º bonus no relacionados con recursos (unidades, actualizaciones), 2º actualizaciones de edificios, 3º entrenamiento de soldados, 4º ataques (por orden de registro) y por último, producción de recursos.</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div>
+                                        <span><h5>Bonus</h5></span>
+                                        <p>Además de la bonificación a la producción que se puede conseguir diariamente mediante la realización de los tests, existen bonificaciones en forma de actualización gratuita de un edificio, y entrenamiento gratuito de unidades.</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+
+</html>

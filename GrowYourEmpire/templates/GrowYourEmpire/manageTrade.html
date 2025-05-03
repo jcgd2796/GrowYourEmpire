@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comercio - Grow Your Empire</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}
+    <div class="container">
+        <div class="row col s12 card">
+            <div class="card-content blue lighten-4">
+                Actualmente tienes {{village.storedFood}} unidades de alimento, {{village.storedWood}} de madera, y {{village.storedStone}} de piedra.
+            </div>
+        </div>
+        <div class="row col s12 card blue lighten-4">
+            <div class="card-content">
+                <h4>Ofertas de comercio enviadas</h4>
+                {% for offer in offersOwned %}
+                <div class="col s12 m9 l9 left">
+                    <p>Has ofrecido a <b>{{offer.destination.villageName}}</b>:</p>
+                    <p>
+                        {% if offer.offeredWood > 0 %}
+                        <i class="material-icons tiny resource-icon">park</i>{{offer.offeredWood}} madera
+                        {% endif %}
+                        {% if offer.offeredStone > 0 %}
+                        <i class="material-icons tiny resource-icon">landscape</i>{{offer.offeredStone}} piedra
+                        {% endif %}
+                        {% if offer.offeredFood > 0 %}
+                        <i class="material-icons tiny resource-icon">restaurant</i>{{offer.offeredFood}} comida
+                        {% endif %}
+                    </p>
+                    <p>A cambio de:</p>
+                    <p>
+                        {% if offer.wantedWood > 0 %}
+                        <i class="material-icons tiny resource-icon">park</i>{{offer.wantedWood}} madera
+                        {% endif %}
+                        {% if offer.wantedStone > 0 %}
+                        <i class="material-icons tiny resource-icon">landscape</i>{{offer.wantedStone}} piedra
+                        {% endif %}
+                        {% if offer.wantedFood > 0 %}
+                        <i class="material-icons tiny resource-icon">restaurant</i>{{offer.wantedFood}} comida
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="col s12 m3 l3 right">
+                    <a class="btn waves-effect waves-light red darken-4" href='/GrowYourEmpire/manager/cancelOffer{{offer.id}}'>
+                        <i class="material-icons left">cancel</i>Cancelar
+                    </a>
+                </div>
+                <div class="col s12 divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row col s12 card blue lighten-4">
+            <div class="card-content">
+                <h4>Ofertas de comercio recibidas</h4>
+                {% for offer in offersReceived %}
+                <div class="col s12 m9 l9">
+                    <p><b>{{offer.source.villageName}}</b> te ofrece:</p>
+                    <p>
+                        {% if offer.offeredWood > 0 %}
+                        <i class="material-icons tiny resource-icon">park</i>{{offer.offeredWood}} madera
+                        {% endif %}
+                        {% if offer.offeredStone > 0 %}
+                        <i class="material-icons tiny resource-icon">landscape</i>{{offer.offeredStone}} piedra
+                        {% endif %}
+                        {% if offer.offeredFood > 0 %}
+                        <i class="material-icons tiny resource-icon">restaurant</i>{{offer.offeredFood}} comida
+                        {% endif %}
+                    </p>
+                    <p>A cambio de:</p>
+                    <p>
+                        {% if offer.wantedWood > 0 %}
+                        <i class="material-icons tiny resource-icon">park</i>{{offer.wantedWood}} madera
+                        {% endif %}
+                        {% if offer.wantedStone > 0 %}
+                        <i class="material-icons tiny resource-icon">landscape</i>{{offer.wantedStone}} piedra
+                        {% endif %}
+                        {% if offer.wantedFood > 0 %}
+                        <i class="material-icons tiny resource-icon">restaurant</i>{{offer.wantedFood}} comida
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="col s12 m3 l3 right">
+                    <a class="btn btn-block waves-effect waves-light teal" href='/GrowYourEmpire/manager/acceptOffer{{offer.id}}'>
+                        <i class="material-icons left">check</i>Aceptar
+                    </a>
+                    <a class="btn btn-block waves-effect waves-light red darken-4" href='/GrowYourEmpire/manager/RejectOffer{{offer.id}}'>
+                        <i class="material-icons left">close</i>Rechazar
+                    </a>
+                </div>
+                <div class="col s12 divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>
+
+

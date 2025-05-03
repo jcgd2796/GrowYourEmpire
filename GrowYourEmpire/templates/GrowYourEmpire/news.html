@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Noticias - Grow Your Empire</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- jQuery (needed for Materialize) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <style>
+            .nav-wrapper { padding: 0 20px; }
+            .news-card { margin: 20px 0; }
+            .news-item { 
+                padding: 20px;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .news-item:last-child {
+                border-bottom: none;
+            }
+            .news-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .news-desc {
+                font-size: 1.1rem;
+                color: #333;
+            }
+        </style>
+    </head>
+    <body class="grey lighten-5">
+        <!-- Navbar -->
+        <nav class="blue darken-1">
+            <div class="nav-wrapper">
+                <a class="brand-logo left" href="/GrowYourEmpire">Grow Your Empire</a>
+                <ul class="right">
+                    <li><a href="/GrowYourEmpire/rules" class="tooltipped" data-position="bottom" data-tooltip="Ver reglas">
+                        <i class="material-icons left">book</i>Reglas
+                    </a></li>
+                    <li><a href="/GrowYourEmpire/logout">
+                        <i class="material-icons left">exit_to_app</i>Cerrar sesión
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card news-card">
+                        <div class="card-content blue lighten-4">
+                            <h4>
+                                <i class="material-icons left">announcement</i>
+                                Noticias
+                            </h4>
+                            <div class="collection">
+                                {% for new in news %}
+                                    <div class="collection-item news-item">
+                                        <div class="news-title">
+                                            {{new.title}}
+                                        </div>
+                                        <div class="news-desc">
+                                            {{new.desc}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var tooltips = document.querySelectorAll('.tooltipped');
+                M.Tooltip.init(tooltips);
+            });
+        </script>
+    </body>
+</html>

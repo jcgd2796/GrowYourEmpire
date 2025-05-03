@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ranking - Grow Your Empire</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	{% include "GrowYourEmpire/navbar.html" %}
+	<div class="container">
+		<div class="row col s12 card blue lighten-4">
+			<div class="card-content">
+				<h4>
+					<i class="material-icons left">leaderboard</i>
+					Top 5 Aldeas
+				</h4>
+				<table class="striped centered scrollable">
+					<thead>
+						<tr>
+							<th>Posición</th>
+							<th>Aldea</th>
+							<th>Puntuación</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for vKey, vValue in ranking.items %}
+							<tr>
+								<td class="rank-position">
+									{% if forloop.counter == 1 %}
+										<i class="material-icons yellow-text text-darken-2">emoji_events</i>
+									{% else %}
+										{{forloop.counter}}
+									{% endif %}
+								</td>
+								<td>{{vKey}}</td>
+								<td class="village-score">{{vValue}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+
+</html>

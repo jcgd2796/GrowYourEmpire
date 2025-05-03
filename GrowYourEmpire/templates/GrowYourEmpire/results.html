@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Resultados - Grow Your Empire</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        {% include "GrowYourEmpire/navbar.html" %}
+        <div class="container">
+            <div class="row card col s12 blue lighten-4">
+                <div class="card-content">
+                    <h4>
+                        <i class="material-icons left">done</i>
+                        Resultados del test {{test.testName}}
+                    </h4>
+                    <p class="center-align">{{points}}/{{totalPoints}} puntos</p>
+                    <p>{{text}}</p>
+                    <p>{{done}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card col s12 m6 l6 card blue lighten-4 left">
+                    <div class="card-content">
+                        <span class="card-title">
+                            <i class="material-icons left">description</i>
+                            Tus respuestas
+                        </span>
+                        {% for choice in choices %}
+                            <div>
+                                <span class="col s9 left-align">{{choice}}</span>
+                                <span class="col s3 badge right-align">{{forloop.counter}}</span>
+                            </div>
+                            <div class="col s12 divider"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card col s12 m6 l6 card blue lighten-4 right">
+                    <div class="card-content">
+                        <span class="card-title">
+                            <i class="material-icons left">check_circle</i>
+                            Respuestas correctas
+                        </span>
+                        {% for solution in solutions %}
+                            <div>
+                                <span class="col s9 left-align">{{solution}}</span>
+                                <span class="col s3 badge right-align">{{forloop.counter}}</span>
+                            </div>
+                            <div class="col s12 divider"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-align">
+                <a class="btn waves-effect waves-light blue darken-4" href='/GrowYourEmpire'>
+                    <i class="material-icons left">home</i>Volver al inicio
+                </a>
+            </div>
+        </div>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/init-materialize.js' %}"></script>
+    </body>
+</html>

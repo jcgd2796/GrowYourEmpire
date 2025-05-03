@@ -1,0 +1,8 @@
+*log*
+*crt*
+*pk*
+runServer.sh
+GrowYourEmpire/migrations
+GrowYourEmpire/__pycache__
+GrowYourEmpire/database/__pycache__
+

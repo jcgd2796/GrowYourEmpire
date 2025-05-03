@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Eventos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body">
+        {% include "GrowYourEmpire/navbar.html" %}
+        <div class="container">
+            <div class="row col s12 card blue lighten-4">
+                <div class="card-content">
+                    <span class="card-title">
+                        Eventos activos
+                    </span>
+                    <div>
+                        {% for event in events %}
+                            <a href='/GrowYourEmpire/events/{{event.id}}'>
+                                <span class="title">
+                                    <h6>{{event.title}}</h6>
+                                </span>
+                            </a>
+                            <div class="divider"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/init-materialize.js' %}"></script>
+    </body>
+</html>

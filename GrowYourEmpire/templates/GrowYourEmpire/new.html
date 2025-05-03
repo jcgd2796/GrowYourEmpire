@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Noticia - Grow Your Empire</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    {% include "GrowYourEmpire/navbar.html" %}
+    <div class="container">
+        <div class="row card col s12 blue lighten-4">
+            <div class="card-content">
+                <h5>{{news.0.title}}</h5>
+                <div class="divider"></div>
+                <p>{{news.0.desc|linebreaks}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init-materialize.js' %}"></script>
+</body>
+</html>
