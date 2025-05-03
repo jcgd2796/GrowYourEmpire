@@ -32,7 +32,7 @@ def correctTest(request,testN):
 				alreadyDone = "Ya has realizado este test. No se han obtenido bonus adicionales"
 			except ObjectDoesNotExist:
 				TestResolution(testName_id=testN,studentName=request.user.student,points=points).save()
-				Bonus(village=Village.objects.get(owner = request.user.student),bonusType=0,bonusAmount=int(points*10/len(solutions)),completed=0,registeredDateTime = timezone.now()).save()
+				Bonus(village=Village.objects.get(owner = request.user.student),bonusType=0,bonusAmount=int(points*10/len(solutions)),completed=0,registeredDateTime = timezone.now(),remainingTicks=14).save()
 				alreadyDone = ''
 			if (points == len(solutions)):
 				text = "No has tenido ningún fallo, ¡Enhorabuena!"
